@@ -60,12 +60,12 @@ namespace bitirme_projesi.adminpanel.Areas.Admin.Controllers
 		public async Task<IActionResult> UpdateNews(int id)
 		{
 			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7272/api/News?id=" + id);
+			var responseMessage = await client.GetAsync("https://localhost:7272/api/News/" + id);
 			if(responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
 				var values = JsonConvert.DeserializeObject<UpdateNewsDto>(jsonData);
-                return View(values);
+				return View(values);
             }
             return View();
         }
